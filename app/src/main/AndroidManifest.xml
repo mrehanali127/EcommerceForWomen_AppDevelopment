@@ -11,16 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceForWomen">
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Splash_Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Verify_signup"></activity>
+        <activity android:name=".Upload_product"></activity>
+        <activity android:name=".Arts_Categories">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Address_Info" />
+        <activity android:name=".Personal_Info" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Splash_Activity">
+
+        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

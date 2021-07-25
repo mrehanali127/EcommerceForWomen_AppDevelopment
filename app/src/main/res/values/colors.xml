@@ -14,5 +14,9 @@
     <color name="secondary_light">#534bae</color>
     <color name="secondary_dark">#000051</color>
     <color name="textcolor">#ffffff</color>
+    <color name="colorPrimaryButton">#FFFFFF</color>
+    <color name="colorEditTextBgColor">#F2F5FA</color>
+    <color name="colorEditTextBorderColor">#E9EBEF</color>
+    <color name="colorPrimaryButtonBg">#14194C</color>
 
 </resources>

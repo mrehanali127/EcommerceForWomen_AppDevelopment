@@ -2,9 +2,7 @@ package com.example.ecommerceforwomen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.TaskExecutor;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,54 +15,96 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText enteredPhoneNo,OTP;
-    Button getOTP,verify;
+public class Verify_signup extends AppCompatActivity {
+    EditText OTP;
+    Button verify,getotp;
     ProgressBar progressBar;
-    TextView signup;
+    TextView login;
     String phone;
     String verificationCodeBySystem;
     private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    User new_user;
+
+    String fname=null;
+    String lname=null;
+    Long phoneNo=null;
+    String DOB=null;
+    String gender=null;
+    String city=null;
+    String tehsil=null;
+    String address=null;
+    String client_id;
+    String artist_id;
+    ArrayList<String> skills;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        // Initialize Firebase Auth
+        setContentView(R.layout.activity_verify_signup);
+
         mAuth = FirebaseAuth.getInstance();
-        enteredPhoneNo=findViewById(R.id.phone1);
-        OTP=findViewById(R.id.otp);
-        getOTP=findViewById(R.id.btngetotp);
-        verify=findViewById(R.id.verify);
-        progressBar=findViewById(R.id.progress1);
-        signup=findViewById(R.id.btnsignup1);
+        database=FirebaseDatabase.getInstance();
+        reference=database.getReference().child("users");
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.size()==8) {
+            fname = bundle.getString("fname");
+            lname = bundle.getString("lname");
+            phoneNo= bundle.getLong("phone");
+            DOB=bundle.getString("DOB");
+            gender=bundle.getString("gender");
+            city=bundle.getString("city");
+            tehsil=bundle.getString("tehsil");
+            address=bundle.getString("address");
+            client_id=mAuth.getInstance().getCurrentUser().getUid();
+            new_user=new User(client_id,fname,lname,phoneNo,DOB,gender,city,tehsil,address);
+        }
+
+        else if(bundle!=null && bundle.size()>8){
+            fname = bundle.getString("fname");
+            lname = bundle.getString("lname");
+            phoneNo= bundle.getLong("phone");
+            DOB=bundle.getString("DOB");
+            gender=bundle.getString("gender");
+            city=bundle.getString("city");
+            tehsil=bundle.getString("tehsil");
+            address=bundle.getString("address");
+            skills=bundle.getStringArrayList("skills");
+            artist_id=mAuth.getInstance().getCurrentUser().getUid();
+            new_user=new User(artist_id,fname,lname,phoneNo,DOB,gender,city,tehsil,address,skills);
+        }
+
+
+        phone=phoneNo.toString();
+        OTP=findViewById(R.id.otpForVerification);
+        progressBar=findViewById(R.id.progress_verify);
+       // getotp=findViewById(R.id.getOTP2);
+        verify=findViewById(R.id.verifyOTP);
+        login=findViewById(R.id.login2);
+
+        sendVerificationCodeToUser(phone);
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this,Personal_Info.class);
+                Intent intent=new Intent(Verify_signup.this,LoginActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        getOTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Long phoneNo=Long.parseLong(enteredPhoneNo.getText().toString().trim());
-                phone=phoneNo.toString();
-                Log.i("Rehan",phone);
-                sendVerificationCodeToUser(phone);
+                finish();
             }
         });
 
@@ -87,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void sendVerificationCodeToUser(String phone) {
-
+        progressBar.setVisibility(View.VISIBLE);
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber("+92"+phone)       // Phone number to verify
@@ -116,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(Verify_signup.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             Log.e("Rehan",e.getMessage());
         }
 
@@ -140,21 +180,24 @@ public class LoginActivity extends AppCompatActivity {
     private void loginByCredentials(PhoneAuthCredential credential){
 
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(Verify_signup.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
+
+                            reference.child(mAuth.getInstance().getCurrentUser().getUid()).setValue(new_user);
+                            Log.i("Rehan","Data Inserted");
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(LoginActivity.this,"Login Successfully",
+                            Toast.makeText(Verify_signup.this,"Account Created Successfully",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(LoginActivity.this,Splash_Activity.class);
+                            Intent intent=new Intent(Verify_signup.this,Splash_Activity.class);
                             startActivity(intent);
                             finish();
 
                         }
                         else{
-                            Toast.makeText(LoginActivity.this,task.getException().getMessage(),
+                            Toast.makeText(Verify_signup.this,task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

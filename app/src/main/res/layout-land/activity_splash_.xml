@@ -8,50 +8,49 @@
 
     <TextView
         android:id="@+id/txtLoginSubHeader"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="8dp"
-        android:layout_marginHorizontal="16dp"
-        android:textAlignment="center"
-        android:textColor="@color/secondary"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
         android:text="“Women can also be creative in total isolation.\nI know excellent
-women artists who do original work\nwithout any response to speak of.
-Maybe they are used to\n lack of feedback. Maybe they are tougher.”"
-        app:layout_constraintBottom_toBottomOf="parent"
+women artists who do original\n work without any response to speak of.
+Maybe they\n are used to lack of feedback. Maybe they are tougher.”"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textloginheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/secondary"
-        android:layout_marginBottom="16dp"
-        android:textSize="24sp"
         android:text="E-commerce For Women "
-        app:layout_constraintBottom_toTopOf="@+id/txtLoginSubHeader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/primary_dark"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IntroPageImg" />
 
     <ImageView
         android:id="@+id/IntroPageImg"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
         android:src="@drawable/ic_shopping_icon1"
-        app:layout_constraintBottom_toTopOf="@+id/textloginheader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btngetstarted"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/btn_primary"
         android:text="Get Started"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/txtLoginSubHeader"
         app:layout_constraintStart_toStartOf="@+id/txtLoginSubHeader"
         app:layout_constraintTop_toBottomOf="@+id/txtLoginSubHeader" />
@@ -64,7 +63,6 @@ Maybe they are used to\n lack of feedback. Maybe they are tougher.”"
         android:src="@drawable/ic_wave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

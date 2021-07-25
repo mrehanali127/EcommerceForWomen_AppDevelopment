@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "239734680303",
+    "firebase_url": "https://ecommerceforwomen-default-rtdb.firebaseio.com",
+    "project_id": "ecommerceforwomen",
+    "storage_bucket": "ecommerceforwomen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239734680303:android:d2a758006512104be6091a",
+        "android_client_info": {
+          "package_name": "com.example.ecommerceforwomen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239734680303-4mq15j4udpp6b1e45o30phulq288pn29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecommerceforwomen",
+            "certificate_hash": "49e7875ee128804700ad6d884a3de02c0c5a0ec9"
+          }
+        },
+        {
+          "client_id": "239734680303-6arlt0q33fsjrnnner3o3j1bacarc7tg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG-m0EgPUkRqn0PYsddM3wYRcwen13xnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239734680303-6arlt0q33fsjrnnner3o3j1bacarc7tg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
