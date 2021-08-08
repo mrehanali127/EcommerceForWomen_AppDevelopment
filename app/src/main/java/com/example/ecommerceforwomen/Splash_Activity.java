@@ -21,7 +21,7 @@ public class Splash_Activity extends AppCompatActivity {
         started.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirect("Personal_Info");
+                redirect("LOGIN");
             }
         });
 

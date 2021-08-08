@@ -21,9 +21,15 @@ import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,9 +38,13 @@ public class LoginActivity extends AppCompatActivity {
     Button getOTP,verify;
     ProgressBar progressBar;
     TextView signup;
+    String TAG="Rehan";
+    String temp_phone;
     String phone;
     String verificationCodeBySystem;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
+    private DatabaseReference root;
 
 
     @Override
@@ -85,6 +95,48 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            String phone_no=currentUser.getPhoneNumber();
+            temp_phone=phone_no.substring(3);
+            Log.i("REHAN",temp_phone);
+            Log.i("REHAN",phone_no);
+            db = FirebaseDatabase.getInstance();
+            root = db.getReference("users").child(temp_phone);
+
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.hasChild("client_id")) {
+                            Log.i(TAG,"HAS Child");
+                            // run some code
+                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        else if(snapshot.hasChild("artist_id")){
+                            Log.i(TAG,"HAS Artist");
+                            // run some code
+                            Intent intent=new Intent(LoginActivity.this,Main_for_Artist.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
+    }
 
     private void sendVerificationCodeToUser(String phone) {
 
@@ -148,9 +200,38 @@ public class LoginActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(LoginActivity.this,"Login Successfully",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(LoginActivity.this,Splash_Activity.class);
+                            db = FirebaseDatabase.getInstance();
+                            root = db.getReference("users").child(temp_phone);
+                            root.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    if (snapshot.hasChild("client_id")) {
+                                        Log.i(TAG,"HAS Child");
+                                        // run some code
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                    else if(snapshot.hasChild("artist_id")){
+                                        Log.i(TAG,"HAS Artist");
+                                        // run some code
+                                        Intent intent=new Intent(LoginActivity.this,Main_for_Artist.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            /*
+                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
-                            finish();
+                            finish();*/
 
                         }
                         else{

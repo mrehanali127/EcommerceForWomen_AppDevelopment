@@ -8,15 +8,19 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,24 +30,35 @@ import com.google.firebase.storage.UploadTask;
 
 public class Upload_product extends AppCompatActivity {
 
-    Button upload_Btn,showAll_btn;
+    Button upload_Btn,back_btn;
     ImageView imageView;
+    EditText title,price,category,description;
     ProgressBar progressBar;
+    String temp_phone;
+    Product new_product;
     private Uri imageUri;
 
-    DatabaseReference root= FirebaseDatabase.getInstance().getReference().child("Images");
+    DatabaseReference root= FirebaseDatabase.getInstance().getReference().child("products");
     StorageReference reference= FirebaseStorage.getInstance().getReference();
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_product);
 
+        title=findViewById(R.id.product_title);
+        price=findViewById(R.id.product_price);
+        category=findViewById(R.id.product_cat);
+        description=findViewById(R.id.product_disc);
         upload_Btn=findViewById(R.id.upload_button);
-        showAll_btn=findViewById(R.id.show_all);
+        back_btn=findViewById(R.id.show_all);
         imageView=findViewById(R.id.add_image);
         progressBar=findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +75,7 @@ public class Upload_product extends AppCompatActivity {
             public void onClick(View v) {
                 // if image uir not null
                 if(imageUri!=null){
+                    // Image uri can be get here
                     uploadToFireBase(imageUri);
                 }else{
                     Toast.makeText(Upload_product.this,"Please Select Image",Toast.LENGTH_SHORT).show();
@@ -93,11 +109,28 @@ public class Upload_product extends AppCompatActivity {
                     @Override
                     public void onSuccess(@NonNull Uri uri) {
 
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        if(currentUser!=null) {
+                            String phone_no = currentUser.getPhoneNumber();
+                            temp_phone = phone_no.substring(3);
+                        }
                         Image new_image=new Image(uri.toString());
-                        String imageId= root.push().getKey();
-                        root.child(imageId).setValue(new_image);
-                        Toast.makeText(Upload_product.this,"Uploaded Successfully",
+                        // Here we have to add our other data
+                        String Product_id= root.push().getKey();
+                        String Artist_id= temp_phone;
+                        String Category=category.getText().toString().trim();
+                        String Title=title.getText().toString().trim();
+                        Long Price= Long.parseLong(price.getText().toString().trim());
+                        String Imageurl=uri.toString();
+                        String Description=description.getText().toString();
+                        new_product=new Product(Product_id,Artist_id,Category,Title,Price,Imageurl,Description);
+                        root.child(Product_id).setValue(new_product);
+                        Toast.makeText(Upload_product.this,"Product Uploaded Successfully",
                                 Toast.LENGTH_SHORT).show();
+                        /*
+                        Intent intent= new Intent( Upload_product.this,Arts_Categories.class);
+                        Log.i("Rehan","chcke2");
+                        startActivity(intent);*/
                     }
                 });
             }

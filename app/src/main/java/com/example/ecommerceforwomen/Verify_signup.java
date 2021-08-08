@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Verify_signup extends AppCompatActivity {
     EditText OTP;
+    String TAG="Rehan";
     Button verify,getotp;
     ProgressBar progressBar;
     TextView login;
@@ -63,6 +64,7 @@ public class Verify_signup extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.size()==8) {
+            Log.i(TAG,"Entered 2");
             fname = bundle.getString("fname");
             lname = bundle.getString("lname");
             phoneNo= bundle.getLong("phone");
@@ -71,7 +73,7 @@ public class Verify_signup extends AppCompatActivity {
             city=bundle.getString("city");
             tehsil=bundle.getString("tehsil");
             address=bundle.getString("address");
-            client_id=mAuth.getInstance().getCurrentUser().getUid();
+            client_id=phoneNo.toString();
             new_user=new User(client_id,fname,lname,phoneNo,DOB,gender,city,tehsil,address);
         }
 
@@ -85,7 +87,7 @@ public class Verify_signup extends AppCompatActivity {
             tehsil=bundle.getString("tehsil");
             address=bundle.getString("address");
             skills=bundle.getStringArrayList("skills");
-            artist_id=mAuth.getInstance().getCurrentUser().getUid();
+            artist_id=phoneNo.toString();
             new_user=new User(artist_id,fname,lname,phoneNo,DOB,gender,city,tehsil,address,skills);
         }
 
@@ -98,7 +100,6 @@ public class Verify_signup extends AppCompatActivity {
         login=findViewById(R.id.login2);
 
         sendVerificationCodeToUser(phone);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +187,7 @@ public class Verify_signup extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            reference.child(mAuth.getInstance().getCurrentUser().getUid()).setValue(new_user);
+                            reference.child(phoneNo.toString()).setValue(new_user);
                             Log.i("Rehan","Data Inserted");
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(Verify_signup.this,"Account Created Successfully",
