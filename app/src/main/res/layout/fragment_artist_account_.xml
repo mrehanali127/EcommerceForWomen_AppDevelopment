@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ArtistAccount_Fragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +18,7 @@
         android:layout_height="320dp">
 
         <TextView
-            android:id="@+id/logout_button"
+            android:id="@+id/logout_button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="logout"
@@ -30,7 +34,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="32dp"
-            android:src="@drawable/ic_user_icon"
+            android:src="@drawable/ic_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -38,7 +42,7 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/user_name"
+            android:id="@+id/user_name2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -52,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
-            android:id="@+id/user_phone"
+            android:id="@+id/user_phone2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone Number"
@@ -65,5 +69,17 @@
             app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ProductsRecyclerview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+    </LinearLayout>
+
 
 </FrameLayout>

@@ -3,6 +3,7 @@
     package="com.example.ecommerceforwomen">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -10,19 +11,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EcommerceForWomen">
-        <activity android:name=".Main_for_Artist"></activity>
-        <activity android:name=".Temp_activity"></activity>
+        android:theme="@style/Theme.EcommerceForWomen"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Product_detail"></activity>
+        <activity
+            android:name=".Main_for_Artist"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Temp_activity" />
         <activity android:name=".Verify_signup" />
         <activity
             android:name=".Upload_product"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Arts_Categories"></activity>
+        <activity android:name=".Arts_Categories" />
         <activity android:name=".Address_Info" />
         <activity android:name=".Personal_Info" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".Splash_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

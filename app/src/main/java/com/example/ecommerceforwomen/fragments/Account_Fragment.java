@@ -17,8 +17,14 @@ import android.widget.TextView;
 import com.example.ecommerceforwomen.LoginActivity;
 import com.example.ecommerceforwomen.MainActivity;
 import com.example.ecommerceforwomen.R;
+import com.example.ecommerceforwomen.Splash_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Account_Fragment extends Fragment {
@@ -27,6 +33,9 @@ public class Account_Fragment extends Fragment {
     TextView logout_btn,username,phone;
     Long number;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
+    private DatabaseReference root;
+    String temp_phone;
 
 
     public Account_Fragment() {
@@ -55,25 +64,30 @@ public class Account_Fragment extends Fragment {
         if(currentUser != null){
             String phone_no=currentUser.getPhoneNumber();
             Log.i("REHAN",phone_no);
-            phone.setText(phone_no);
+            temp_phone=phone_no.substring(3);
+            phone.setText("0"+temp_phone);
+            db = FirebaseDatabase.getInstance();
+            root = db.getReference("users").child(temp_phone);
         }
 
 
-        logout_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("REHAN","Button clicked");
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                if(currentUser != null){
-                    Log.i("REHAN","Entered");
-                    mAuth.signOut();
-                    Intent intent=new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }
+
+        ////
+                logout_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("REHAN", "Button clicked");
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        if (currentUser != null) {
+                            Log.i("REHAN", "Entered");
+                            mAuth.signOut();
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                            startActivity(intent);
+                        }
 
 
-            }
-        });
+                    }
+                });
     }
 
 }

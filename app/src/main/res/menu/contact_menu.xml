@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_whatsapp"
+        android:icon="@drawable/ic_whatsapp"
+        android:title="Whatsapp"/>
+    <item android:id="@+id/menu_Message"
+        android:icon="@drawable/ic_baseline_message_24"
+
+        android:title="SMS"/>
+    <item android:id="@+id/menu_call"
+        android:icon="@drawable/ic_baseline_local_phone_24"
+        android:title="Call"/>
+
+</menu>

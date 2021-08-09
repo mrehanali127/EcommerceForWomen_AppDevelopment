@@ -1,21 +1,21 @@
 package com.example.ecommerceforwomen;
 
 public class Image {
-    private String imaeUrl;
+    private String imageUrl;
 
     public Image(){
 
     }
 
-    public Image(String imaeUrl) {
-        this.imaeUrl = imaeUrl;
+    public Image(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getImaeUrl() {
-        return imaeUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImaeUrl(String imaeUrl) {
-        this.imaeUrl = imaeUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

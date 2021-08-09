@@ -56,7 +56,6 @@ public class Upload_product extends AppCompatActivity {
         imageView=findViewById(R.id.add_image);
         progressBar=findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-
         mAuth = FirebaseAuth.getInstance();
 
 

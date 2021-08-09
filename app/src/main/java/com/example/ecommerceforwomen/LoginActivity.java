@@ -102,38 +102,6 @@ public class LoginActivity extends AppCompatActivity {
         if(currentUser!=null){
             String phone_no=currentUser.getPhoneNumber();
             temp_phone=phone_no.substring(3);
-            Log.i("REHAN",temp_phone);
-            Log.i("REHAN",phone_no);
-            db = FirebaseDatabase.getInstance();
-            root = db.getReference("users").child(temp_phone);
-
-            root.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                        if (snapshot.hasChild("client_id")) {
-                            Log.i(TAG,"HAS Child");
-                            // run some code
-                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                        else if(snapshot.hasChild("artist_id")){
-                            Log.i(TAG,"HAS Artist");
-                            // run some code
-                            Intent intent=new Intent(LoginActivity.this,Main_for_Artist.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
 
         }
     }
