@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:gravity="center"
+            android:layout_marginHorizontal="16dp"
             android:text="Text"
             android:textColor="@color/secondary_dark"/>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:gravity="center"
+            android:layout_marginHorizontal="16dp"
             android:textColor="@color/secondary_dark"
             />
     </LinearLayout>

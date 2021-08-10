@@ -72,7 +72,7 @@ public class ArtistHome_Fragment extends Fragment {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                //products.clear();
+                products.clear();
                 Log.i("Rehan", snapshot.toString());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product=dataSnapshot.getValue(Product.class);

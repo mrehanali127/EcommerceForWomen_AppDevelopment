@@ -1,24 +1,24 @@
 package com.example.ecommerceforwomen;
 
 public class Category2 {
-    String categoryname;
+    String name;
     String ImageUrl;
 
-    public Category2(){
 
+    public Category2() {
     }
 
-    public Category2(String categoryName, String imageUrl) {
-        this.categoryname = categoryName;
+    public Category2(String name, String imageUrl) {
+        this.name = name;
         ImageUrl = imageUrl;
     }
 
-    public String getCategoryName() {
-        return categoryname;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryname = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImageUrl() {

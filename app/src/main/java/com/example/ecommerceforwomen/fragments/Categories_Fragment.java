@@ -69,6 +69,7 @@ public class Categories_Fragment extends Fragment {
                 //products.clear();
                 Log.i("Rehan", snapshot.toString());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Log.i("Rehan",dataSnapshot.getValue().toString());
                     Category2 category=dataSnapshot.getValue(Category2.class);
                     //Log.i("Rehan",category.getCategoryName());
                     categories2.add(category);

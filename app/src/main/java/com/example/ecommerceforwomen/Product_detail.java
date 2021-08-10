@@ -5,23 +5,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Product_detail extends AppCompatActivity {
 
     ImageView product_img;
-    TextView p_name, p_price, p_description, artist_name, artist_categories;
+    TextView p_name, p_price, p_description, artist_name, artist_number;
     Button other_products;
     BottomNavigationView bottomNavigationView;
     String product_name, product_price, product_desc, artist_id, prod_img;
+
 
 
     @Override
@@ -40,12 +52,14 @@ public class Product_detail extends AppCompatActivity {
         }
 
 
+
+
         product_img = findViewById(R.id.product_detailes_image);
         p_name = findViewById(R.id.product_details_title);
         p_price = findViewById(R.id.product_details_price);
         p_description = findViewById(R.id.product_detail_description);
         artist_name = findViewById(R.id.artist_name_card);
-        artist_categories = findViewById(R.id.artist_categories_card);
+        artist_number = findViewById(R.id.artist_number_card);
         other_products = findViewById(R.id.artist_btn_card);
 
         Glide.with(this).load(prod_img)
@@ -53,8 +67,24 @@ public class Product_detail extends AppCompatActivity {
         p_name.setText(product_name);
         p_price.setText("RS." + product_price);
         p_description.setText(product_desc);
+
+
         artist_name.setText("0"+artist_id);
-        //artist_categories.setText(product.getCategory());
+        artist_number.setText("0"+artist_id);
+
+
+
+        other_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("artist_id",artist_id);
+                Intent intent=new Intent(Product_detail.this,Other_products.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigation3);

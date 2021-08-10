@@ -38,6 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryAdapter(Context context,ArrayList<Category> categories,ArrayList<String> skills) {
 
         this.context = context;
+
         this.categories = categories;
         this.skills=skills;
     }

@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.ecommerceforwomen.fragments.Account_Fragment;
 import com.example.ecommerceforwomen.fragments.ArtistAccount_Fragment;
 import com.example.ecommerceforwomen.fragments.ArtistAdd_Fragment;
 import com.example.ecommerceforwomen.fragments.ArtistHome_Fragment;
@@ -41,7 +43,7 @@ public class Main_for_Artist extends AppCompatActivity {
                         break;
                     case R.id.menu_add2 : temp = new ArtistAdd_Fragment();
                         break;
-                    case R.id.menu_account2 : temp = new ArtistAccount_Fragment();
+                    case R.id.menu_account2 : temp = new Account_Fragment();
                         break;
                 }
                 // Replace temprory Fragement with acutal fragment
@@ -49,9 +51,9 @@ public class Main_for_Artist extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.FrameContainer2,temp);
                 fragmentTransaction.commit();
-
                 return true;
             }
         });
     }
+
 }

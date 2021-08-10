@@ -59,7 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
                .apply(RequestOptions.bitmapTransform(new RoundedCorners(14))).into(holder.product_img);
        // Picasso.get().load("http://i.imgur.com/DvpvklR.png").dontAnimate().into(holder.product_img);
         holder.productName.setText(product.getTitle());
-        holder.productPrice.setText(product.getPrice().toString());
+        holder.productPrice.setText("Rs."+ product.getPrice().toString());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

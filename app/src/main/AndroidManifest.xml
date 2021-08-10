@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceForWomen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Product_detail"></activity>
+        <activity android:name=".Other_products"></activity>
+        <activity android:name=".Specifict_Category" />
+        <activity android:name=".Product_detail" />
         <activity
             android:name=".Main_for_Artist"
             android:windowSoftInputMode="adjustPan" />
@@ -25,7 +27,7 @@
         <activity android:name=".Arts_Categories" />
         <activity android:name=".Address_Info" />
         <activity android:name=".Personal_Info" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".Splash_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

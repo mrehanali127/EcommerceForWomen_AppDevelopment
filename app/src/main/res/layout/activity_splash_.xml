@@ -15,8 +15,8 @@
         android:textAlignment="center"
         android:textColor="@color/secondary"
         android:text="“Women can also be creative in total isolation.\nI know excellent
-women artists who do original work\nwithout any response to speak of.
-Maybe they are used to\n lack of feedback. Maybe they are tougher.”"
+women artists who do original work without any response to speak of.
+Maybe they are used to lack of feedback. Maybe they are tougher.”"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
